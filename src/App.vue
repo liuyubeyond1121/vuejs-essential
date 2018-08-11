@@ -1,26 +1,43 @@
-<template lang="pug">
-  div#app
-    img(src="./assets/logo.png")
-    h1 Welcome from pug & sass
+<template>
+  <div id="wrap">
+    <TheHeader/>
+    <div id="main-container" class="container main-container">
+      <router-view/>
+    </div>
+    <TheFooter/>
+  </div>
 </template>
 
 <script>
+import TheHeader from '@/components/layouts/TheHeader'
+import TheFooter from '@/components/layouts/TheFooter'
+
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    TheHeader,
+    TheFooter
+  }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 200px;
+  $container-large-desktop: 1200px;
+  $btn-primary-bg: #00b5ad;
+  $btn-primary-border: #00b5ad;
+  $label-primary-bg: #00b5ad;
+  $pagination-active-bg: #00b5ad;
+  $pagination-active-border: #00b5ad;
+  $pagination-color: #00b5ad;
+  $input-border-focus: #00b5ad;
+  $link-color: #12c4c5;
+  $link-hover-color: #22ddde;
+  $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+  $fa-font-path: "~font-awesome/fonts/";
 
-  h1 {
-    color:#42b983;
-  }
-}
+  @import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+  @import "~font-awesome/scss/font-awesome";
+  @import "./styles/main";
+  @import "./styles/extra";
 </style>
