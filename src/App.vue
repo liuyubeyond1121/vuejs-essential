@@ -40,4 +40,9 @@ export default {
   @import "~font-awesome/scss/font-awesome";
   @import "./styles/main";
   @import "./styles/extra";
+  @import 'simplemde/dist/simplemde.min.css';
+  @import 'highlight.js/styles/paraiso-dark.css';
+
+  div .editor-preview pre { background: #333;}
+  div .editor-preview pre code[class*="language-"] { color: #eee;}
 </style>
