@@ -152,7 +152,7 @@ export const getArticlesByFilter = (state, getters) => (filter) => {
 }
 
 // 根据关键字 keyword 返回搜索结果
-export const getArticlesByKeyword = (state, getters) => (keyword) => {
+export const getArticlesByKeyword = (state, getters) => (keyword, filter) => {
   let articles = getters.computedArticles
   let results = []
 
@@ -162,13 +162,29 @@ export const getArticlesByKeyword = (state, getters) => (keyword) => {
       const regex = new RegExp(`(${keyword})`, 'gi')
 
       if (title.indexOf(keyword) !== -1 || content.indexOf(keyword) !== -1) {
-        // 使用 state.origin 代替 location.origin
         const url = `${state.origin}/articles/${articleId}/content`
         title = title.replace(regex, '<span class="highlight">$1</span>')
         content = content.substr(0, 100).replace(regex, '<span class="highlight">$1</span>')
         results.push({...article, ...{ url, title, content }})
       }
     })
+  }
+
+  // 评估排序方式
+  switch (filter) {
+    case 'vote':
+      // 将赞的最多的文章排在前面
+      results.sort((a, b) => {
+        const alikeUsers = Array.isArray(a.likeUsers) ? a.likeUsers : []
+        const blikeUsers = Array.isArray(b.likeUsers) ? b.likeUsers : []
+
+        return blikeUsers.length - alikeUsers.length
+      })
+
+      break
+    default:
+      // 默认将标题中含有关键字的文章排在前面
+      results.sort((a, b) => a.title.indexOf(keyword) < b.title.indexOf(keyword))
   }
 
   return results
