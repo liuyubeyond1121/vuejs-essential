@@ -41,14 +41,21 @@
         </div>
       </div>
     </div>
+    <!-- 侧栏 -->
+    <TheSidebar/>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
+  import TheSidebar from '@/components/layouts/TheSidebar'
 
   export default {
     name: 'Home',
+    components: {
+      // 局部注册 TheSidebar
+      TheSidebar
+    },
     data() {
       return {
         msg: '',
