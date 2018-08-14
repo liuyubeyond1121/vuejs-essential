@@ -13,7 +13,8 @@ const state = {
   auth: ls.getItem('auth'),
   // 所有文章状态
   articles: ls.getItem('articles'),
-  searchValue: ''
+  searchValue: '',
+  origin: location.origin.indexOf('github.io') !== -1 ? `${location.origin}/vuejs-essential/dist` : location.origin
 }
 
 const mutations = {
